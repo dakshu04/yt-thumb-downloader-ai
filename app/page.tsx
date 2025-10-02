@@ -5,22 +5,41 @@ import { getYouTubeID, getThumbnailURLs } from "@/utils/youtube";
 
 export default function Home() {
   const [input, setInput] = useState("");
-  const [thumbnails, setThumbnails] = useState<string[] | null>(null);
+  const [thumbnails, setThumbnails] = useState<{ label: string; url: string }[] | null>(null);
+  const [selectedRes, setSelectedRes] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const id = getYouTubeID(input.trim());
     if (!id) return alert("Invalid YouTube URL or ID");
 
-    const urls = Object.values(getThumbnailURLs(id)).filter(Boolean);
-    if (urls.length === 0) return alert("No thumbnails found for this video.");
+    const urls = getThumbnailURLs(id); 
+    const formatted = Object.entries(urls)
+      .filter(([_, v]) => Boolean(v))
+      .map(([key, url]) => ({
+        label:
+          key === "default"
+            ? "120x90 (Default)"
+            : key === "mq"
+            ? "320x180 (Medium)"
+            : key === "hq"
+            ? "480x360 (High)"
+            : key === "sd"
+            ? "640x480 (SD)"
+            : key === "maxres"
+            ? "1280x720 (HD)"
+            : key,
+        url: url as string,
+      }));
 
-    setThumbnails(urls);
+    if (formatted.length === 0) return alert("No thumbnails found for this video.");
+
+    setThumbnails(formatted);
+    setSelectedRes(formatted[0].url); // default to first available
   };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6">
-      
       {/* Header */}
       <motion.h1
         className="text-4xl md:text-5xl font-extrabold mb-6 text-center"
@@ -55,39 +74,44 @@ export default function Home() {
         <span className="text-gray-400">Ad Placeholder (Top Banner)</span>
       </div>
 
-      {/* Thumbnails Grid */}
+      {/* Single Preview with Resolution Selector */}
       {thumbnails && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          {thumbnails.map((url, idx) => (
-            <div key={url} className="flex flex-col items-center">
-              <motion.div
-                className="flex flex-col items-center bg-gray-800 p-4 rounded-xl shadow-lg w-full"
-                whileHover={{ scale: 1.03, boxShadow: "0px 10px 20px rgba(0,0,0,0.4)" }}
-              >
-                <motion.img
-                  src={url}
-                  alt="thumbnail"
-                  className="rounded-lg mb-3 w-full object-cover"
-                  whileHover={{ scale: 1.05 }}
-                />
-                <motion.a
-                  href={`/api/download?url=${encodeURIComponent(url)}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition"
-                >
-                  Download
-                </motion.a>
-              </motion.div>
+        <div className="flex flex-col items-center gap-6 w-full max-w-2xl">
+          {/* Preview Image */}
+          {selectedRes && (
+            <motion.img
+              key={selectedRes} // re-renders when resolution changes
+              src={selectedRes}
+              alt="thumbnail preview"
+              className="rounded-xl shadow-lg max-w-full"
+              height={300}
+              width={300}
+              whileHover={{ scale: 1.05 }}
+            />
+          )}
 
-              {/* Inline Ads after 2nd thumbnail */}
-              {idx === 1 && (
-                <div className="h-32 bg-gray-800 flex items-center justify-center rounded-xl mt-4 w-full">
-                  <span className="text-gray-400">Ad Placeholder (Inline)</span>
-                </div>
-              )}
-            </div>
-          ))}
+          {/* Dropdown */}
+          <select
+            className="px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={selectedRes}
+            onChange={(e) => setSelectedRes(e.target.value)}
+          >
+            {thumbnails.map((thumb, idx) => (
+              <option key={idx} value={thumb.url}>
+                {thumb.label}
+              </option>
+            ))}
+          </select>
+
+          {/* Download Button */}
+          <motion.a
+            href={`/api/download?url=${encodeURIComponent(selectedRes)}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition text-center"
+          >
+            Download
+          </motion.a>
         </div>
       )}
 

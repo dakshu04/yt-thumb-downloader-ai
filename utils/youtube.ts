@@ -9,6 +9,9 @@ export function getYouTubeID(urlOrID: string): string | null {
     if (url.hostname.includes('youtube.com')) {
       return url.searchParams.get('v');
     }
+    console.log(url)
+    console.log(url.hostname)
+
     // For youtu.be short URLs
     if (url.hostname === 'youtu.be') {
       return url.pathname.slice(1);
