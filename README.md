@@ -1,3 +1,44 @@
+# 🎥 YouTube Thumbnail Downloader
+
+A modern, lightweight web app built with **Next.js + TypeScript** that lets you easily extract and download high-quality YouTube video thumbnails in different resolutions.  
+
+The project is styled with **TailwindCSS**, features smooth animations using **Framer Motion**, and is fully optimized for **SEO + Google AdSense monetization**.
+
+---
+
+## 🚀 Features
+
+- ✅ Paste any **YouTube video URL/ID** → instantly get thumbnails.  
+- ✅ Supports **multiple resolutions** (maxresdefault, hqdefault, mqdefault, etc.).  
+- ✅ **One-click download** (direct `<a download>` or via proxy API).  
+- ✅ **Responsive design** (mobile & desktop).  
+- ✅ **Animations & effects** with Framer Motion.  
+- ✅ Error handling for:
+  - Invalid YouTube links  
+  - Missing max resolution thumbnail  
+- ✅ **SEO optimized** with meta tags, sitemap.xml, and OG tags.  
+- ✅ **AdSense-ready**: reserved ad slots (banner, inline, sidebar, footer).  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: [Next.js 14](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/)  
+- **Styling**: [TailwindCSS](https://tailwindcss.com/) + [Framer Motion](https://www.framer.com/motion/)  
+- **Deployment**: [Vercel](https://vercel.com/)  
+- **SEO & Analytics**: Google Search Console + Google Analytics 4  
+- **Monetization**: Google AdSense (ads.txt, auto ads, manual ad slots)  
+- **Optional Services**:  
+  - Cloudflare (DNS + CDN + SSL)  
+  - Upstash Redis (rate-limiting & caching proxy)  
+
+---
+
+## 📂 Project Structure
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
