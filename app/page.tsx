@@ -23,17 +23,10 @@ export default function Home() {
       
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center md:items-start max-w-5xl">
-        
-        {/* Banner Ad Placeholder */}
-        <div className="w-full h-20 bg-gray-800 mb-6 flex items-center justify-center rounded-lg">
-          <span className="text-gray-400">Ad Banner Placeholder</span>
-        </div>
 
         {/* Heading */}
         <motion.h1
           className="text-4xl md:text-5xl font-extrabold mb-8 text-center md:text-left"
-          animate={{ scale: [1, 1.05, 1], rotate: [0, 2, -2, 0] }}
-          transition={{ repeat: Infinity, duration: 4 }}
         >
           🎬 YouTube Thumbnail Downloader
         </motion.h1>
