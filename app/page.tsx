@@ -104,11 +104,11 @@ export default function Home() {
       </div>
 
       {/* Sidebar Ad Placeholder (desktop only) */}
-      <div className="hidden md:flex md:flex-col md:w-64 md:ml-6 mt-8 md:mt-0">
+      {/* <div className="hidden md:flex md:flex-col md:w-64 md:ml-6 mt-8 md:mt-0">
         <div className="h-96 bg-gray-800 rounded-xl flex items-center justify-center">
           <span className="text-gray-400">Sidebar Ad</span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
