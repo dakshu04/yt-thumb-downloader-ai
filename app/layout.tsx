@@ -51,7 +51,7 @@ export default function RootLayout({
       <head>
         
         {/* Google Site Verification */}
-        <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+        <meta name="google-site-verification" content="googled6eca24a87116947.html" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white`}
