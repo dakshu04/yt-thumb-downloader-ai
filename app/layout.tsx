@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YouTube Thumbnail Downloader",
     description: "Easily download YouTube video thumbnails in HD, Full HD, and Max Resolution.",
-    url: "https://yourdomain.com",
+    url: "https://yt-thumb-downloader-ai.vercel.app/",
     siteName: "YouTube Thumbnail Downloader",
     images: [
       {
