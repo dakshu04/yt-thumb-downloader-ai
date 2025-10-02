@@ -49,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
       </head>
